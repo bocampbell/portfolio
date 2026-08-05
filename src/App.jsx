@@ -1,5 +1,6 @@
+import { useEffect, useState } from 'react';
 import { Menu } from '@base-ui/react/menu';
-import { ArrowDown, Menu as MenuIcon } from 'lucide-react';
+import { ArrowDown, ArrowLeft, ArrowUpRight, Menu as MenuIcon } from 'lucide-react';
 import { motion, useReducedMotion } from 'motion/react';
 
 const navigation = [
@@ -46,8 +47,11 @@ const projects = [
     title: 'Adobe XD Accessibility',
     image: 'adobe-xd.png',
     alt: 'Adobe XD accessibility project',
+    href: '#/work/adobe-xd-accessibility',
   },
 ];
+
+const caseStudyAsset = (fileName) => `${import.meta.env.BASE_URL}case-studies/adobe-xd/${fileName}`;
 
 function Header() {
   return (
@@ -83,8 +87,203 @@ function Header() {
   );
 }
 
+function CaseStudyFigure({ src, alt, caption, className = '' }) {
+  const reduceMotion = useReducedMotion();
+
+  return (
+    <motion.figure
+      className={`case-figure ${className}`}
+      initial={reduceMotion ? false : { opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.16 }}
+      transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+    >
+      <img src={caseStudyAsset(src)} alt={alt} loading="lazy" />
+      {caption && <figcaption>{caption}</figcaption>}
+    </motion.figure>
+  );
+}
+
+function AdobeXdCaseStudy({ reduceMotion }) {
+  return (
+    <motion.div
+      className="case-study"
+      initial={reduceMotion ? false : { opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.35 }}
+    >
+      <header className="case-hero">
+        <a className="back-link" href="#work">
+          <ArrowLeft aria-hidden="true" size={18} /> Selected work
+        </a>
+        <p className="eyebrow">IBM + Adobe XD · Proof of concept</p>
+        <h1>Adobe XD Accessibility</h1>
+        <p className="case-intro">
+          Helping designers specify accessible interaction behavior before their work reaches engineering.
+        </p>
+      </header>
+
+      <dl className="case-facts">
+        <div><dt>Company</dt><dd>IBM with Adobe XD</dd></div>
+        <div><dt>Role</dt><dd>UX Designer, owner</dd></div>
+        <div><dt>Type</dt><dd>Proof of concept</dd></div>
+      </dl>
+
+      <section className="case-section case-copy-grid" aria-labelledby="brief-heading">
+        <p className="case-kicker">The brief</p>
+        <div className="case-copy">
+          <h2 id="brief-heading">Move accessibility decisions upstream.</h2>
+          <p>
+            Adobe had a strong accessibility group, and IBM designers were adopting the newly released XD quickly. I worked with Adobe’s accessibility team on a proof of concept for features that could help designers communicate accessibility requirements directly to developers.
+          </p>
+          <p>
+            The goal was to make accessibility part of the design specification itself, instead of leaving engineers to infer behavior after visual design was complete.
+          </p>
+        </div>
+      </section>
+
+      <CaseStudyFigure
+        src="keyboard-menu-spec.png"
+        alt="Adobe XD proof of concept showing a keyboard interaction menu"
+        caption="A proposed specification menu for keyboard interaction behavior."
+        className="case-figure-wide"
+      />
+
+      <section className="case-section" aria-labelledby="focus-heading">
+        <div className="case-copy narrow-copy">
+          <p className="case-kicker">Design focus</p>
+          <h2 id="focus-heading">Three details designers often overlook.</h2>
+          <p>
+            I focused the concept on tab order, keyboard interaction, and landmark regions. Each prototype showed what a designer could see while working in XD and how those choices could become implementation-ready specifications.
+          </p>
+        </div>
+        <ol className="focus-list">
+          <li><span>01</span><strong>Tab order</strong></li>
+          <li><span>02</span><strong>Keyboard interaction</strong></li>
+          <li><span>03</span><strong>Landmark regions</strong></li>
+        </ol>
+      </section>
+
+      <CaseStudyFigure
+        src="tab-stop-exported.png"
+        alt="Exported Adobe XD specification identifying a keyboard tab stop"
+        caption="Exported specifications carry interaction details from design to engineering."
+        className="case-figure-wide"
+      />
+
+      <section className="case-section case-copy-grid" aria-labelledby="guidance-heading">
+        <p className="case-kicker">Guidance in context</p>
+        <div className="case-copy">
+          <h2 id="guidance-heading">Useful constraints, right where decisions happen.</h2>
+          <p>
+            Focused dropdowns offered a limited set of appropriate accessibility options, reducing the need to repeatedly look up requirements. Warnings surfaced conflicts and missing information before handoff.
+          </p>
+        </div>
+      </section>
+
+      <div className="case-figure-pair">
+        <CaseStudyFigure
+          src="region-name.png"
+          alt="Adobe XD interface for naming an accessibility landmark region"
+          caption="Naming a landmark region."
+        />
+        <CaseStudyFigure
+          src="warnings.png"
+          alt="Adobe XD accessibility warning interface"
+          caption="Warnings for incomplete or conflicting choices."
+        />
+      </div>
+
+      <section className="case-section case-copy-grid" aria-labelledby="symbols-heading">
+        <p className="case-kicker">Shared language</p>
+        <div className="case-copy">
+          <h2 id="symbols-heading">Accessibility symbols become part of the design.</h2>
+          <p>
+            Designers could overlay accessibility information on their work using included symbols, choose the relevant properties in XD, and export those decisions alongside the visual specification.
+          </p>
+        </div>
+      </section>
+
+      <CaseStudyFigure
+        src="regions.png"
+        alt="Interface design overlaid with accessibility landmark region annotations"
+        caption="Landmark regions are visible and editable in the design environment."
+        className="case-figure-wide"
+      />
+
+      <section className="case-section case-copy-grid" aria-labelledby="handoff-heading">
+        <p className="case-kicker">Handoff</p>
+        <div className="case-copy">
+          <h2 id="handoff-heading">The exported specification preserves intent.</h2>
+          <p>
+            The output carried the necessary accessibility information to engineers, making responsibilities explicit and reducing the difficult interpretation work that typically happens late in development.
+          </p>
+        </div>
+      </section>
+
+      <CaseStudyFigure
+        src="region-result.png"
+        alt="Exported accessibility landmark region specification"
+        caption="An exported region specification ready for implementation."
+        className="case-figure-wide"
+      />
+
+      <section className="case-section case-copy-grid" aria-labelledby="example-heading">
+        <p className="case-kicker">In practice</p>
+        <div className="case-copy">
+          <h2 id="example-heading">A complex application becomes legible.</h2>
+          <p>
+            Applied to IBM Verse, the specification could show an engineer exactly where each tab stop belonged across the email interface.
+          </p>
+        </div>
+      </section>
+
+      <CaseStudyFigure
+        src="verse-tabs.png"
+        alt="IBM Verse email interface annotated with keyboard tab stops"
+        caption="IBM Verse annotated with the intended keyboard tab sequence."
+        className="case-figure-wide"
+      />
+
+      <section className="case-result" aria-labelledby="result-heading">
+        <p className="case-kicker">Result</p>
+        <h2 id="result-heading">Alignment on the need, but not the implementation.</h2>
+        <p>
+          Adobe’s accessibility team aligned with the idea, but the XD product managers believed annotation tools were sufficient. The concept did not ship, and the underlying challenge remains: many designers still lack an effective way to communicate accessible interaction behavior in their specifications.
+        </p>
+        <a className="text-link" href="#work">
+          Return to selected work <ArrowUpRight aria-hidden="true" size={18} />
+        </a>
+      </section>
+    </motion.div>
+  );
+}
+
 function App() {
   const reduceMotion = useReducedMotion();
+  const [route, setRoute] = useState(window.location.hash);
+
+  useEffect(() => {
+    const handleHashChange = () => {
+      setRoute(window.location.hash);
+    };
+
+    window.addEventListener('hashchange', handleHashChange);
+    return () => window.removeEventListener('hashchange', handleHashChange);
+  }, []);
+
+  useEffect(() => {
+    if (route === '#/work/adobe-xd-accessibility' || !route) {
+      window.scrollTo({ top: 0, behavior: 'auto' });
+      return;
+    }
+
+    requestAnimationFrame(() => {
+      document.querySelector(route)?.scrollIntoView();
+    });
+  }, [route]);
+
+  const isAdobeCaseStudy = route === '#/work/adobe-xd-accessibility';
 
   return (
     <div id="top" className="site-shell">
@@ -92,6 +291,10 @@ function App() {
       <Header />
 
       <main id="main">
+        {isAdobeCaseStudy ? (
+          <AdobeXdCaseStudy reduceMotion={reduceMotion} />
+        ) : (
+          <>
         <motion.section
           className="intro"
           initial={reduceMotion ? false : { opacity: 0, y: 18 }}
@@ -115,9 +318,12 @@ function App() {
           </div>
           <div className="project-grid" aria-label="Portfolio projects">
             {projects.map((project, index) => (
-              <motion.article
+              project.href ? (
+              <motion.a
                 className="project-tile"
                 key={project.title}
+                href={project.href}
+                aria-label={`View case study: ${project.title}`}
                 initial={reduceMotion ? false : { opacity: 0, y: 24 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.18 }}
@@ -138,8 +344,36 @@ function App() {
                 <div className="project-meta">
                   <p className="project-index">{String(index + 1).padStart(2, '0')}</p>
                   <h3>{project.title}</h3>
+                  <ArrowUpRight className="project-arrow" aria-hidden="true" size={19} />
                 </div>
-              </motion.article>
+              </motion.a>
+              ) : (
+                <motion.article
+                  className="project-tile"
+                  key={project.title}
+                  initial={reduceMotion ? false : { opacity: 0, y: 24 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, amount: 0.18 }}
+                  transition={{
+                    duration: 0.48,
+                    delay: reduceMotion ? 0 : (index % 3) * 0.08,
+                    ease: [0.22, 1, 0.36, 1],
+                  }}
+                >
+                  <div className="project-media">
+                    <img
+                      className={`project-image${project.cover ? ' project-image-cover' : ''}`}
+                      src={projectAsset(project.image)}
+                      alt={project.alt}
+                      loading="lazy"
+                    />
+                  </div>
+                  <div className="project-meta">
+                    <p className="project-index">{String(index + 1).padStart(2, '0')}</p>
+                    <h3>{project.title}</h3>
+                  </div>
+                </motion.article>
+              )
             ))}
           </div>
         </section>
@@ -157,6 +391,8 @@ function App() {
             <h2 id="contact-heading">Contact</h2>
           </div>
         </section>
+          </>
+        )}
       </main>
     </div>
   );
