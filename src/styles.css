@@ -409,7 +409,7 @@ a.project-tile:hover {
 
 .project-media {
   display: grid;
-  aspect-ratio: 16 / 9;
+  aspect-ratio: 480 / 271;
   place-items: center;
   overflow: hidden;
   border-bottom: 1px solid var(--color-line);
