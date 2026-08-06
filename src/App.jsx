@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Menu } from '@base-ui/react/menu';
 import { useForm, ValidationError } from '@formspree/react';
-import { ArrowDown, ArrowLeft, ArrowUpRight, CheckCircle2, LockKeyhole, Menu as MenuIcon, Send } from 'lucide-react';
+import { ArrowDown, ArrowLeft, ArrowUpRight, CheckCircle2, LockKeyhole, Menu as MenuIcon, Rocket, Send } from 'lucide-react';
 import { motion, useReducedMotion } from 'motion/react';
 
 const navigation = [
@@ -89,7 +89,7 @@ function Header() {
   return (
     <header className="site-header">
       <a className="brand" href="#top" aria-label="Bo Campbell, home">
-        <span className="brand-mark" aria-hidden="true">BC</span>
+        <span className="brand-mark" aria-hidden="true"><Rocket size={18} strokeWidth={2} /></span>
         <span>Bo Campbell</span>
       </a>
 
