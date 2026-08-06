@@ -19,66 +19,77 @@ const projects = [
     alt: 'U.S. Army logo',
     position: '51% 35%',
     locked: true,
+    tags: ['Design Strategy', 'AI Prototyping'],
     href: '#/work/atis-command-directed-training',
   },
   {
     title: 'Procore Partner Experience',
     image: 'procore.png',
     alt: 'Procore logo',
+    tags: ['Design Strategy', 'User Research'],
     href: '#/work/procore-partner-experience',
   },
   {
     title: 'IBM Accessible Design Thinking',
     image: 'ibm-design-thinking.png',
     alt: 'Color blind bee illustration',
+    tags: ['Accessibility', 'Design Strategy'],
     href: '#/work/ibm-accessible-design-thinking',
   },
   {
     title: 'IBM Accessibility Compliance System',
     image: 'ibm-compliance.png',
     alt: 'IBM accessibility compliance project',
+    tags: ['Accessibility', 'Systems Design'],
     href: '#/work/ibm-accessibility-compliance-system',
   },
   {
     title: 'IBM Accessibility Toolkit',
     image: 'ibm-toolkit.png',
     alt: 'IBM accessibility toolkit project',
+    tags: ['Accessibility', 'Information Architecture'],
     href: '#/work/ibm-accessibility-toolkit',
   },
   {
     title: 'IBM Aging in Place',
     image: 'ibm-aging.png',
     alt: 'IBM aging in place project',
+    tags: ['Ethnographic Research', 'Service Design'],
     href: '#/work/ibm-aging-in-place',
   },
   {
     title: 'Job Accommodation Network (IBM)',
     image: 'jan.png',
     alt: 'Job Accommodation Network project',
+    tags: ['User Research', 'Product Management'],
     href: '#/work/job-accommodation-network',
   },
   {
     title: 'Gehry Engineering',
     image: 'gehry.png',
     alt: 'Gehry Engineering project',
+    tags: ['Prototyping', 'Collaboration'],
     href: '#/work/gehry-engineering',
   },
   {
     title: 'CJ Affiliate Account Manager',
     image: 'cj-affiliate.png',
     alt: 'CJ Affiliate account manager project',
+    tags: ['Interaction Design', 'Usability Testing'],
     href: '#/work/cj-affiliate-account-manager',
   },
   {
     title: 'FBS Flexmls and Spark',
     image: 'fbs.png',
     alt: 'FBS Flexmls and Spark project',
+    tags: ['Marketplace', 'Information Architecture'],
     href: '#/work/flexmls-spark',
   },
   {
     title: 'Adobe XD Accessibility',
     image: 'adobe-xd.png',
     alt: 'Adobe XD accessibility project',
+    tags: ['Accessibility', 'Prototyping'],
     href: '#/work/adobe-xd-accessibility',
   },
 ];
@@ -987,7 +998,7 @@ function ProcorePartnerCaseStudy({ reduceMotion }) {
       </header>
 
       <dl className="case-facts">
-        <div><dt>Company</dt><dd>Procore</dd></div>
+        <div><dt>Company</dt><dd>Procore Technologies</dd></div>
         <div><dt>Role</dt><dd>Staff Product Designer</dd></div>
         <div><dt>Scope</dt><dd>Strategy, research, design, delivery</dd></div>
       </dl>
@@ -1055,31 +1066,35 @@ function ProcorePartnerCaseStudy({ reduceMotion }) {
         className="case-figure-wide procore-wide-diagram"
       />
 
-      <CaseStudyFigure
-        study="procore-partner"
-        src="research-takeaways.png"
-        alt="Key quantitative takeaways from Procore partner research"
-        caption="Approval time, process length, and missing guidance defined the opportunity."
-        className="case-figure-wide procore-wide-diagram"
-      />
+      <section className="case-section procore-vision-section" aria-labelledby="procore-vision-heading">
+        <div className="case-copy-grid">
+          <p className="case-kicker">Vision story</p>
+          <div className="case-copy">
+            <h2 id="procore-vision-heading">Turn research into a North Star the organization could support.</h2>
+            <p>
+              Together with the product manager, I compiled the research that we had about our users and stakeholders and wrote a story that compared the as-is experience to a vision of what the ecosystem could be in three to five years. The story was presented to the executive leadership team for approval and became our “Northstar” direction for the team.
+            </p>
+          </div>
+        </div>
 
-      <section className="case-section case-copy-grid" aria-labelledby="procore-vision-heading">
-        <p className="case-kicker">Vision story</p>
-        <div className="case-copy">
-          <h2 id="procore-vision-heading">Turn research into a North Star the organization could support.</h2>
-          <p>
-            The product manager and I combined our research into a story comparing the current experience with a three-to-five-year ecosystem vision. Executive leadership approved the direction, and it became the team's North Star for strategy and sequencing.
-          </p>
+        <div className="procore-vision-artifacts">
+          <CaseStudyFigure
+            study="procore-partner"
+            src="research-takeaways.png"
+            alt="Overview of the complete Procore Ecosystem vision story"
+            caption="The complete story moves from the current ecosystem and stakeholder experience through the as-is journey to a three-to-five-year future state."
+            className="case-figure-wide procore-wide-diagram"
+          />
+
+          <CaseStudyFigure
+            study="procore-partner"
+            src="vision-story.png"
+            alt="Future-state slide from the Procore Ecosystem vision story"
+            caption="A future-state slide shows an inductive, step-by-step developer experience within the larger vision."
+            className="case-figure-wide procore-artifact"
+          />
         </div>
       </section>
-
-      <CaseStudyFigure
-        study="procore-partner"
-        src="vision-story.png"
-        alt="Procore Ecosystem vision story"
-        caption="The vision connected near-term decisions to a coherent future experience."
-        className="case-figure-wide procore-artifact"
-      />
 
       <section className="case-section" aria-labelledby="procore-personas-heading">
         <div className="case-copy narrow-copy">
@@ -1166,6 +1181,12 @@ function ProcorePartnerCaseStudy({ reduceMotion }) {
           alt="Proposed user flow for form-based manifest creation"
           caption="Shared flow reviews aligned product, design, and engineering."
         />
+        <CaseStudyFigure
+          study="procore-partner"
+          src="low-fidelity.png"
+          alt="Detailed possible user flow showing pages, user actions, system actions, questions, and alternate paths"
+          caption="A detailed possible flow mapped user and system actions across app creation and component configuration."
+        />
       </div>
 
       <section className="case-section case-copy-grid" aria-labelledby="procore-prototype-heading">
@@ -1182,18 +1203,16 @@ function ProcorePartnerCaseStudy({ reduceMotion }) {
       </section>
 
       <div className="procore-prototype-gallery">
-        <CaseStudyFigure study="procore-partner" src="low-fidelity.png" alt="Low-fidelity form-based manifest prototype" caption="Low fidelity kept early reviews centered on flow." />
         <CaseStudyFigure study="procore-partner" src="iteration-review.png" alt="Manifest prototype iterations reviewed by the product team" caption="Seven iterations narrowed toward a shared direction." />
         <CaseStudyFigure study="procore-partner" src="high-fidelity-flow.png" alt="High-fidelity form-based manifest flow" caption="Design-system components made the intended experience implementation-ready." />
+        <CaseStudyFigure
+          study="procore-partner"
+          src="final-interface.png"
+          alt="Final Procore form-based app and manifest creation interface"
+          caption="The first release replaced code editing with a guided form-based experience."
+          className="procore-final-interface"
+        />
       </div>
-
-      <CaseStudyFigure
-        study="procore-partner"
-        src="final-interface.png"
-        alt="Final Procore form-based app and manifest creation interface"
-        caption="The first release replaced code editing with a guided form-based experience."
-        className="procore-final-interface"
-      />
 
       <section className="case-result procore-result" aria-labelledby="procore-result-heading">
         <p className="case-kicker">First incremental release</p>
@@ -2240,7 +2259,14 @@ function App() {
                 </div>
                 <div className="project-meta">
                   <p className="project-index">{String(index + 1).padStart(2, '0')}</p>
-                  <h3>{project.title}</h3>
+                  <div className="project-info">
+                    <h3>{project.title}</h3>
+                    {project.tags && (
+                      <ul className="project-tags" aria-label={`${project.title} tags`}>
+                        {project.tags.map((tag) => <li key={tag}>{tag}</li>)}
+                      </ul>
+                    )}
+                  </div>
                   <ArrowUpRight className="project-arrow" aria-hidden="true" size={19} />
                 </div>
               </motion.a>
@@ -2273,7 +2299,14 @@ function App() {
                   </div>
                   <div className="project-meta">
                     <p className="project-index">{String(index + 1).padStart(2, '0')}</p>
-                    <h3>{project.title}</h3>
+                    <div className="project-info">
+                      <h3>{project.title}</h3>
+                      {project.tags && (
+                        <ul className="project-tags" aria-label={`${project.title} tags`}>
+                          {project.tags.map((tag) => <li key={tag}>{tag}</li>)}
+                        </ul>
+                      )}
+                    </div>
                   </div>
                 </motion.article>
               )
