@@ -2192,7 +2192,7 @@ function App() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
         >
-          <p className="eyebrow">Product design · Accessibility · Systems</p>
+          <p className="eyebrow">Product design · Design Strategy · Accessibility</p>
           <h1>Designing clear paths through complex problems.</h1>
           <p className="intro-copy">
             I’m Bo Campbell, a product designer focused on useful, inclusive experiences and the systems that make them possible.
@@ -2319,9 +2319,9 @@ function App() {
                   <ul>
                     <li>Design Leadership</li>
                     <li>Design Strategy</li>
-                    <li>Design Mentorship</li>
-                    <li>AI Prototyping</li>
+                    <li>Design Mentoring</li>
                     <li>User Research</li>
+                    <li>AI Prototyping</li>
                     <li>Usability Testing</li>
                     <li>Information Architecture</li>
                     <li>Accessible Design</li>
@@ -2335,8 +2335,8 @@ function App() {
                     <h4 id="about-tools-heading">Tools</h4>
                   </div>
                   <ul>
-                    <li>Figma + Make</li>
-                    <li>Codex (VS Code)</li>
+                    <li>Figma, Figma Make, FigJam</li>
+                    <li>Codex, Claude</li>
                     <li>Lucid, Miro, Mural</li>
                     <li>Sketch</li>
                     <li>Axure</li>
