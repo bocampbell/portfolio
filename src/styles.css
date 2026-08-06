@@ -113,6 +113,55 @@ a:focus-visible {
   font-weight: 700;
 }
 
+.brand-mark svg {
+  transform-origin: center;
+}
+
+.brand-mark svg path:first-child {
+  fill: transparent;
+}
+
+.brand:hover .brand-mark svg,
+.brand:focus-visible .brand-mark svg {
+  animation: rocket-launch 0.85s cubic-bezier(0.32, 0, 0.67, 0) both;
+}
+
+.brand:hover .brand-mark svg path:first-child,
+.brand:focus-visible .brand-mark svg path:first-child {
+  animation: rocket-flame 0.85s ease-out both;
+}
+
+@keyframes rocket-launch {
+  0% {
+    opacity: 1;
+    transform: translate(0, 0) scale(1);
+  }
+
+  18% {
+    transform: translate(-2px, 2px) scale(0.96);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translate(38px, -38px) scale(0.72);
+  }
+}
+
+@keyframes rocket-flame {
+  0% {
+    fill: transparent;
+  }
+
+  8%,
+  72% {
+    fill: white;
+  }
+
+  100% {
+    fill: transparent;
+  }
+}
+
 .desktop-nav {
   display: flex;
   gap: var(--space-5);
@@ -1663,5 +1712,15 @@ a.project-tile:hover {
   *::after {
     scroll-behavior: auto !important;
     transition-duration: 0.01ms !important;
+  }
+
+  .brand:hover .brand-mark svg,
+  .brand:focus-visible .brand-mark svg {
+    animation: none;
+  }
+
+  .brand:hover .brand-mark svg path:first-child,
+  .brand:focus-visible .brand-mark svg path:first-child {
+    animation: none;
   }
 }
