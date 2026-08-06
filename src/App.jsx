@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Menu } from '@base-ui/react/menu';
-import { ArrowDown, ArrowLeft, ArrowUpRight, Menu as MenuIcon } from 'lucide-react';
+import { useForm, ValidationError } from '@formspree/react';
+import { ArrowDown, ArrowLeft, ArrowUpRight, CheckCircle2, LockKeyhole, Menu as MenuIcon, Send } from 'lucide-react';
 import { motion, useReducedMotion } from 'motion/react';
 
 const navigation = [
@@ -17,6 +18,7 @@ const projects = [
     image: 'atis-cdt.jpg',
     alt: 'U.S. Army logo',
     position: '51% 35%',
+    locked: true,
     href: '#/work/atis-command-directed-training',
   },
   {
@@ -668,6 +670,65 @@ function JanCaseStudy({ reduceMotion }) {
 }
 
 function AtisCdtCaseStudy({ reduceMotion }) {
+  const [isUnlocked, setIsUnlocked] = useState(
+    () => window.sessionStorage.getItem('atis-cdt-unlocked') === 'true',
+  );
+  const [password, setPassword] = useState('');
+  const [passwordError, setPasswordError] = useState('');
+
+  const handleUnlock = (event) => {
+    event.preventDefault();
+
+    if (password === 'ATIS26') {
+      window.sessionStorage.setItem('atis-cdt-unlocked', 'true');
+      setIsUnlocked(true);
+      setPasswordError('');
+      return;
+    }
+
+    setPasswordError('That password is not correct.');
+  };
+
+  if (!isUnlocked) {
+    return (
+      <motion.section
+        className="atis-password-gate"
+        initial={reduceMotion ? false : { opacity: 0, y: 16 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+        aria-labelledby="atis-password-heading"
+      >
+        <LockKeyhole aria-hidden="true" size={28} strokeWidth={1.7} />
+        <p className="case-kicker">Protected case study</p>
+        <h1 id="atis-password-heading">Command Directed Training</h1>
+        <p>Enter the password to view this project.</p>
+        <form className="atis-password-form" onSubmit={handleUnlock}>
+          <label htmlFor="atis-password">Password</label>
+          <div className="atis-password-controls">
+            <input
+              id="atis-password"
+              type="password"
+              value={password}
+              onChange={(event) => {
+                setPassword(event.target.value);
+                setPasswordError('');
+              }}
+              autoComplete="current-password"
+              aria-describedby={passwordError ? 'atis-password-error' : undefined}
+              aria-invalid={Boolean(passwordError)}
+              autoFocus
+            />
+            <button type="submit">Unlock</button>
+          </div>
+          {passwordError && <p id="atis-password-error" role="alert">{passwordError}</p>}
+        </form>
+        <a className="back-link" href="#work">
+          <ArrowLeft aria-hidden="true" size={18} /> Selected work
+        </a>
+      </motion.section>
+    );
+  }
+
   const personas = [
     { title: 'Commander', level: 'Division and above', src: 'persona-leader.png' },
     { title: 'Unit leader', level: 'Company, battery, troop', src: 'persona-soldier.png' },
@@ -707,14 +768,6 @@ function AtisCdtCaseStudy({ reduceMotion }) {
         <div><dt>Type</dt><dd>Responsive web application</dd></div>
       </dl>
 
-      <CaseStudyFigure
-        study="atis-cdt"
-        src="hero.jpg"
-        alt="Soldiers participating in an Army training exercise"
-        caption="Command-directed events require the same visibility as standardized training."
-        className="case-figure-wide atis-hero-image"
-      />
-
       <section className="case-section case-copy-grid" aria-labelledby="atis-brief-heading">
         <p className="case-kicker">The brief</p>
         <div className="case-copy">
@@ -753,16 +806,22 @@ function AtisCdtCaseStudy({ reduceMotion }) {
           <p>
             Eight soldiers participated across five sessions. Our UX researcher facilitated, and the team synthesized each recorded interview in Dovetail, using its AI tools to identify repeated points across the material.
           </p>
-          <p>
-            Leaders emphasized that command-directed work needed its own navigation category, clearer readiness metrics, and support for tracking events such as timed runs and ruck marches. The need was not merely record keeping; it was a legible view of preparedness.
-          </p>
         </div>
       </section>
 
-      <section className="atis-insights" aria-label="Research themes">
-        <div><span>01</span><strong>Separate command-directed work from mandatory training</strong></div>
-        <div><span>02</span><strong>Make readiness metrics easy to interpret</strong></div>
-        <div><span>03</span><strong>Track unique events across unit hierarchies</strong></div>
+      <section className="atis-interview-quotes" aria-label="Selected interview quotes">
+        <blockquote>
+          <p>Command directed training should be its own category in the navigation hierarchy, separate from mandatory training and tasks.</p>
+          <footer>Sergeant Major</footer>
+        </blockquote>
+        <blockquote>
+          <p>CG has asked for a way to see ourselves in regards to H2F... it's been challenging to find the right metrics and then be able to put it into a visual that's easy to understand.</p>
+          <footer>Colonel</footer>
+        </blockquote>
+        <blockquote>
+          <p>First Corps requires a system to track and visualize command-directed training events like 12-mile ruck marches and 4-mile timed runs.</p>
+          <footer>Lieutenant Colonel</footer>
+        </blockquote>
       </section>
 
       <section className="case-section case-copy-grid" aria-labelledby="atis-workflow-heading">
@@ -797,45 +856,81 @@ function AtisCdtCaseStudy({ reduceMotion }) {
       </section>
 
       <div className="atis-iteration-gallery">
-        <CaseStudyFigure study="atis-cdt" src="low-fidelity.jpg" alt="Low-fidelity ATIS interface concepts" caption="Chunky low-fidelity screens made structural discussion fast." />
-        <CaseStudyFigure study="atis-cdt" src="medium-fidelity.jpg" alt="Medium-fidelity ATIS interface progression" caption="Repeated reviews moved the workflow toward user validation." />
-        <CaseStudyFigure study="atis-cdt" src="high-fidelity.png" alt="High-fidelity ATIS prototype overview" caption="The coded prototype combined the interaction model with the design library." />
+        <article className="atis-fidelity-stage">
+          <header><span>01</span><h3>Low Fidelity Wires</h3></header>
+          <CaseStudyFigure study="atis-cdt" src="low-fidelity.jpg" alt="Low-fidelity ATIS interface concepts" caption="Chunky low-fidelity screens made structural discussion fast." />
+        </article>
+        <article className="atis-fidelity-stage">
+          <header><span>02</span><h3>Medium Fidelity Progression</h3></header>
+          <CaseStudyFigure study="atis-cdt" src="medium-fidelity.jpg" alt="Medium-fidelity ATIS interface progression" caption="Repeated reviews moved the workflow toward user validation." />
+          <CaseStudyFigure study="atis-cdt" src="high-fidelity.png" alt="Refined ATIS interface progression" caption="The refined interface established the direction for the coded prototype." />
+        </article>
+        <article className="atis-fidelity-stage">
+          <header><span>03</span><h3>High Fidelity, Clickable AI-enabled Prototyping</h3></header>
+          <div className="atis-prototype-gallery">
+            {prototypeScreens.map((screen, index) => (
+              <CaseStudyFigure
+                key={screen.src}
+                study="atis-cdt"
+                {...screen}
+                caption={`Prototype view ${String(index + 1).padStart(2, '0')}`}
+              />
+            ))}
+          </div>
+        </article>
       </div>
 
       <section className="case-section case-copy-grid" aria-labelledby="atis-challenges-heading">
         <p className="case-kicker">Core challenges</p>
         <div className="case-copy">
           <h2 id="atis-challenges-heading">Make dates and acknowledgments survive personnel movement.</h2>
-          <p>
-            Standard training came with general completion dates, but ad hoc training required custom “suspense” dates. Those dates had to preserve credit when soldiers moved into or out of units.
-          </p>
-          <p>
-            Training could be assigned at high command levels but executed several levels down by companies, batteries, and troops. The system needed an acknowledgment and notification process that traveled reliably through every layer.
-          </p>
+          <ol className="atis-challenge-list">
+            <li>
+              <span>01</span>
+              <p>Standard training came with general completion dates, but ad hoc training required custom “suspense” dates. Those dates had to preserve credit when soldiers moved into or out of units.</p>
+            </li>
+            <li>
+              <span>02</span>
+              <p>Training could be assigned at high command levels but executed several levels down by companies, batteries, and troops. The system needed an acknowledgment and notification process that traveled reliably through every layer.</p>
+            </li>
+          </ol>
         </div>
       </section>
-
-      <div className="atis-prototype-gallery">
-        {prototypeScreens.map((screen, index) => (
-          <CaseStudyFigure
-            key={screen.src}
-            study="atis-cdt"
-            {...screen}
-            caption={`Prototype view ${String(index + 1).padStart(2, '0')}`}
-          />
-        ))}
-      </div>
 
       <section className="case-section case-copy-grid" aria-labelledby="atis-validation-heading">
         <p className="case-kicker">Checking the work</p>
         <div className="case-copy">
           <h2 id="atis-validation-heading">Review usability, architecture, delivery, and field fit on a regular cadence.</h2>
-          <p>
-            I held design critiques twice a week for usability and consistency. Weekly sessions with the architecture lead and program manager surfaced technical concerns, and two-week sprint reviews demonstrated progress to development and program leadership.
-          </p>
-          <p>
-            We also returned to two previously interviewed users to validate the emerging workflow against their real responsibilities.
-          </p>
+          <ol className="atis-check-list">
+            <li>
+              <span>01</span>
+              <div>
+                <h3>Bi-weekly Design Critiques</h3>
+                <p>Twice a week I held a design critique meeting where the design team discussed designs. Any new progress was reviewed and discussed for usability and consistency.</p>
+              </div>
+            </li>
+            <li>
+              <span>02</span>
+              <div>
+                <h3>Weekly Architecture Reviews</h3>
+                <p>Each week I met with the architecture lead and the program manager to review progress for any red flags in the technical foundation.</p>
+              </div>
+            </li>
+            <li>
+              <span>03</span>
+              <div>
+                <h3>Sprint/Iteration Reviews and Demos</h3>
+                <p>Every two weeks we demoed our interface during sprint iteration reviews that included development team and program team leads.</p>
+              </div>
+            </li>
+            <li>
+              <span>04</span>
+              <div>
+                <h3>User Validation Interviews</h3>
+                <p>We returned to two different users who we had interviewed previously to validate our work.</p>
+              </div>
+            </li>
+          </ol>
         </div>
       </section>
 
@@ -1981,6 +2076,50 @@ function AdobeXdCaseStudy({ reduceMotion }) {
   );
 }
 
+function ContactForm() {
+  const [state, handleSubmit] = useForm('xgawvokl');
+
+  if (state.succeeded) {
+    return (
+      <div className="contact-success" role="status">
+        <CheckCircle2 aria-hidden="true" size={28} />
+        <p className="case-kicker">Message sent</p>
+        <h3>Thanks for reaching out.</h3>
+        <p>I’ll get back to you as soon as I can.</p>
+      </div>
+    );
+  }
+
+  return (
+    <form className="contact-form" onSubmit={handleSubmit}>
+      <div className="contact-field">
+        <label htmlFor="contact-name">Name</label>
+        <input id="contact-name" name="name" type="text" autoComplete="name" required />
+      </div>
+
+      <div className="contact-field">
+        <label htmlFor="contact-email">Email</label>
+        <input id="contact-email" name="email" type="email" autoComplete="email" required />
+        <ValidationError className="form-error" prefix="Email" field="email" errors={state.errors} />
+      </div>
+
+      <div className="contact-field contact-message-field">
+        <label htmlFor="contact-message">Message</label>
+        <textarea id="contact-message" name="message" rows="7" required />
+        <ValidationError className="form-error" prefix="Message" field="message" errors={state.errors} />
+      </div>
+
+      <input type="hidden" name="_subject" value="New portfolio inquiry" />
+      <input className="contact-honeypot" type="text" name="_gotcha" tabIndex="-1" autoComplete="off" />
+
+      <button className="contact-submit" type="submit" disabled={state.submitting}>
+        <Send aria-hidden="true" size={18} />
+        {state.submitting ? 'Sending...' : 'Send message'}
+      </button>
+    </form>
+  );
+}
+
 function App() {
   const reduceMotion = useReducedMotion();
   const [route, setRoute] = useState(window.location.hash);
@@ -2075,7 +2214,7 @@ function App() {
                 className="project-tile"
                 key={project.title}
                 href={project.href}
-                aria-label={`View case study: ${project.title}`}
+                aria-label={`View case study: ${project.title}${project.locked ? ' (password protected)' : ''}`}
                 initial={reduceMotion ? false : { opacity: 0, y: 24 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.18 }}
@@ -2093,6 +2232,11 @@ function App() {
                     loading="lazy"
                     style={{ objectPosition: project.position ?? '50% 50%' }}
                   />
+                  {project.locked && (
+                    <span className="project-lock" title="Password protected">
+                      <LockKeyhole aria-hidden="true" size={17} />
+                    </span>
+                  )}
                 </div>
                 <div className="project-meta">
                   <p className="project-index">{String(index + 1).padStart(2, '0')}</p>
@@ -2121,6 +2265,11 @@ function App() {
                       loading="lazy"
                       style={{ objectPosition: project.position ?? '50% 50%' }}
                     />
+                    {project.locked && (
+                      <span className="project-lock" title="Password protected">
+                        <LockKeyhole aria-hidden="true" size={17} />
+                      </span>
+                    )}
                   </div>
                   <div className="project-meta">
                     <p className="project-index">{String(index + 1).padStart(2, '0')}</p>
@@ -2191,6 +2340,14 @@ function App() {
           <div className="section-heading">
             <p className="section-number">03</p>
             <h2 id="contact-heading">Contact</h2>
+          </div>
+          <div className="contact-layout">
+            <div className="contact-intro">
+              <p className="case-kicker">Start a conversation</p>
+              <h3>Have a complex problem worth making simpler?</h3>
+              <p>Tell me a little about the product, team, or challenge. I’ll respond directly by email.</p>
+            </div>
+            <ContactForm />
           </div>
         </section>
           </>
