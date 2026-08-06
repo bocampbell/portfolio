@@ -371,30 +371,59 @@ h1 {
   line-height: 1.75;
 }
 
-.about-capabilities {
+.about-profile-grid {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  margin: var(--space-6) 0 0;
-  padding: 0;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin-top: var(--space-7);
   border-top: 1px solid var(--color-line);
-  list-style: none;
 }
 
-.about-capabilities li {
-  padding: var(--space-3) 0;
-  border-bottom: 1px solid var(--color-line);
+.about-profile-group {
+  min-width: 0;
+  padding: var(--space-4) var(--space-4) 0 0;
+}
+
+.about-profile-group + .about-profile-group {
+  padding-left: var(--space-4);
+  border-left: 1px solid var(--color-line);
+}
+
+.about-profile-heading {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-3);
+  padding-bottom: var(--space-4);
+}
+
+.about-profile-heading span {
+  color: var(--color-coral);
   font-family: var(--font-display);
-  font-size: 0.95rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+.about-profile-heading h4 {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 1.25rem;
   font-weight: 600;
 }
 
-.about-capabilities li:nth-child(odd) {
-  padding-right: var(--space-4);
+.about-profile-group ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
 }
 
-.about-capabilities li:nth-child(even) {
-  padding-left: var(--space-4);
-  border-left: 1px solid var(--color-line);
+.about-profile-group li {
+  min-height: 3.15rem;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid var(--color-line);
+  color: var(--color-muted);
+  font-size: 0.92rem;
+  line-height: 1.35;
 }
 
 .about-personal {
@@ -1580,15 +1609,20 @@ a.project-tile:hover {
     position: static;
   }
 
-  .about-capabilities {
+  .about-profile-grid {
     grid-template-columns: 1fr;
   }
 
-  .about-capabilities li:nth-child(odd),
-  .about-capabilities li:nth-child(even) {
-    padding-right: 0;
+  .about-profile-group,
+  .about-profile-group + .about-profile-group {
+    padding: var(--space-4) 0 0;
     padding-left: 0;
+    border-top: 1px solid var(--color-line);
     border-left: 0;
+  }
+
+  .about-profile-group:first-child {
+    border-top: 0;
   }
 
   .about-personal {

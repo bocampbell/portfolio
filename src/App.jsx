@@ -2310,14 +2310,61 @@ function App() {
                 I bring empathy and rigor to the work, but also diplomacy. The strongest outcomes happen when users, product, engineering, and leadership can see the same problem clearly enough to solve it together.
               </p>
 
-              <ul className="about-capabilities" aria-label="Core capabilities">
-                <li>Design leadership and strategy</li>
-                <li>User research and usability testing</li>
-                <li>Accessible and inclusive design</li>
-                <li>Information architecture</li>
-                <li>Design mentorship</li>
-                <li>AI-enabled prototyping</li>
-              </ul>
+              <div className="about-profile-grid">
+                <section className="about-profile-group" aria-labelledby="about-skills-heading">
+                  <div className="about-profile-heading">
+                    <span aria-hidden="true">01</span>
+                    <h4 id="about-skills-heading">Skills</h4>
+                  </div>
+                  <ul>
+                    <li>Design Leadership</li>
+                    <li>Design Strategy</li>
+                    <li>Design Mentorship</li>
+                    <li>AI Prototyping</li>
+                    <li>User Research</li>
+                    <li>Usability Testing</li>
+                    <li>Information Architecture</li>
+                    <li>Accessible Design</li>
+                    <li>Project Management</li>
+                  </ul>
+                </section>
+
+                <section className="about-profile-group" aria-labelledby="about-tools-heading">
+                  <div className="about-profile-heading">
+                    <span aria-hidden="true">02</span>
+                    <h4 id="about-tools-heading">Tools</h4>
+                  </div>
+                  <ul>
+                    <li>Figma + Make</li>
+                    <li>Codex (VS Code)</li>
+                    <li>Lucid, Miro, Mural</li>
+                    <li>Sketch</li>
+                    <li>Axure</li>
+                    <li>InVision</li>
+                    <li>Balsamiq</li>
+                    <li>Jira, GitLab</li>
+                    <li>Adobe Creative Cloud</li>
+                  </ul>
+                </section>
+
+                <section className="about-profile-group" aria-labelledby="about-experience-heading">
+                  <div className="about-profile-heading">
+                    <span aria-hidden="true">03</span>
+                    <h4 id="about-experience-heading">Experience</h4>
+                  </div>
+                  <ul>
+                    <li>Logistics Management Institute</li>
+                    <li>Procore Technologies</li>
+                    <li>IBM</li>
+                    <li>FBS Data Systems</li>
+                    <li>ProductPlan</li>
+                    <li>Gehry Technologies</li>
+                    <li>CJ Affiliate</li>
+                    <li>Santa Barbara Zoo</li>
+                    <li>Yardi Systems</li>
+                  </ul>
+                </section>
+              </div>
 
               <div className="about-personal">
                 <p>
