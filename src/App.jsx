@@ -1256,7 +1256,7 @@ function AccessibleDesignThinkingCaseStudy({ reduceMotion }) {
     {
       number: '02',
       title: 'Design framework',
-      text: 'A role-aware guide placed accessibility tasks at the right points in Design Thinking so designers, product managers, and developers could prevent debt as they worked.',
+      text: 'The need for ongoing, contextual guidance led to the IBM Accessibility Toolkit: a role-aware guide that placed accessibility tasks at the right points in Design Thinking so designers, product managers, and developers could prevent debt as they worked.',
     },
     {
       number: '03',
@@ -1369,6 +1369,19 @@ function AccessibleDesignThinkingCaseStudy({ reduceMotion }) {
             </li>
           ))}
         </ol>
+        <div className="design-thinking-resources">
+          <p>Toolkit resources</p>
+          <nav aria-label="Accessibility Toolkit resources">
+            <a href="https://www.ibm.com/able/toolkit/" target="_blank" rel="noreferrer">
+              <span>Live toolkit</span>
+              <ArrowUpRight aria-hidden="true" size={17} />
+            </a>
+            <a href="#/work/ibm-accessibility-toolkit">
+              <span>Toolkit case study</span>
+              <ArrowUpRight aria-hidden="true" size={17} />
+            </a>
+          </nav>
+        </div>
       </section>
 
       <CaseStudyFigure

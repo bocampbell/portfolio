@@ -1189,6 +1189,43 @@ a.project-tile:hover {
   grid-column: 2;
 }
 
+.design-thinking-resources {
+  display: grid;
+  grid-template-columns: minmax(8rem, 0.35fr) minmax(0, 1fr);
+  gap: var(--space-5);
+  align-items: stretch;
+  border-bottom: 1px solid var(--color-line);
+}
+
+.design-thinking-resources > p {
+  margin: 0;
+  padding: var(--space-4) 0;
+  color: var(--color-muted);
+  font-family: var(--font-display);
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.design-thinking-resources nav {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.design-thinking-resources a {
+  display: flex;
+  min-width: 0;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  padding: var(--space-4);
+  border-left: 1px solid var(--color-line);
+  font-weight: 600;
+}
+
+.design-thinking-resources a:hover {
+  color: var(--color-green);
+}
+
 .design-thinking-toolkit {
   width: min(100%, 892px);
   margin-right: auto;
@@ -1699,6 +1736,22 @@ a.project-tile:hover {
   .design-thinking-pillars li:nth-child(even) {
     padding-right: 0;
     padding-left: 0;
+    border-left: 0;
+  }
+
+  .design-thinking-resources,
+  .design-thinking-resources nav {
+    grid-template-columns: 1fr;
+  }
+
+  .design-thinking-resources {
+    gap: 0;
+  }
+
+  .design-thinking-resources a {
+    padding-right: 0;
+    padding-left: 0;
+    border-top: 1px solid var(--color-line);
     border-left: 0;
   }
 
