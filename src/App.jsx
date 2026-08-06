@@ -16,7 +16,7 @@ const projects = [
     title: 'ATIS CDT',
     image: 'atis-cdt.jpg',
     alt: 'U.S. Army logo',
-    cover: true,
+    position: '51% 35%',
     href: '#/work/atis-command-directed-training',
   },
   {
@@ -2087,10 +2087,11 @@ function App() {
               >
                 <div className="project-media">
                   <img
-                    className={`project-image${project.cover ? ' project-image-cover' : ''}`}
+                    className="project-image"
                     src={projectAsset(project.image)}
                     alt={project.alt}
                     loading="lazy"
+                    style={{ objectPosition: project.position ?? '50% 50%' }}
                   />
                 </div>
                 <div className="project-meta">
@@ -2114,10 +2115,11 @@ function App() {
                 >
                   <div className="project-media">
                     <img
-                      className={`project-image${project.cover ? ' project-image-cover' : ''}`}
+                      className="project-image"
                       src={projectAsset(project.image)}
                       alt={project.alt}
                       loading="lazy"
+                      style={{ objectPosition: project.position ?? '50% 50%' }}
                     />
                   </div>
                   <div className="project-meta">
